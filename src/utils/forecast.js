@@ -9,11 +9,13 @@ const forecast = (latitude, longitude, callback) => {
         } else if (body.error) {
             callback('Unable to find location', undefined)
         } else {
+            let time = new Date(body.currently.time *1000)
+                time = time.toTimeString().split(" ")[0]
             callback(undefined,{
                         summary: body.daily.data[0].summary,
                         temp: body.currently.temperature , 
                         precip: body.currently.precipProbability,
-                        time: body.currently.time
+                        time: time
                     })
         }
     })

@@ -23,10 +23,7 @@ io.on('connection' , (socket) => {
                 if(error){
                     return error
                 }
-                let a = new Date(forecastdata.time *1000)
-                a = a.toTimeString().split(" ")[0]
-                forecastdata.time = a
-                socket.emit('message',forecastdata)
+                socket.emit('forecast',forecastdata)
             })
       
        
