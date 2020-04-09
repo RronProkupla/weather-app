@@ -1,6 +1,9 @@
 const socket = io()
 
 socket.on('message', (coords) => {
+    document.querySelector("#temperature").innerHTML = coords.temp + "℃"
+    document.querySelector("#summary").innerHTML = coords.summary + " with " + coords.precip + "% chance of rain." 
+    document.querySelector("#time").innerHTML = coords.time
     console.log(coords)
 })
 
