@@ -4,15 +4,15 @@ socket.on('forecast', (coords) => {
     document.querySelector("#temperature").innerHTML = coords.temp + "℃"
     document.querySelector("#summary").innerHTML = coords.summary + " with " + coords.precip + "% chance of rain." 
     document.querySelector("#time").innerHTML = coords.time
-    console.log(coords)
 })
 
 document.querySelector('#searchButton').addEventListener('click', (e) => {
     e.preventDefault()
-
+    if(!(document.querySelector('#searchField').value == "")){
     socket.emit('searchText', {
         search: document.querySelector('#searchField').value
     })
+}
 })
 
 socket.on('search',(searchData) => {
@@ -29,9 +29,11 @@ socket.on('search',(searchData) => {
 
 document.querySelector('#searchField').addEventListener('keypress', function(e) {
     if(e.keyCode == 13 ){
-        socket.emit('searchText', {
+        if(!(document.querySelector('#searchField').value == "")){
+            socket.emit('searchText', {
             search: document.querySelector('#searchField').value
-        })
+            })
+        }  
     }
 })
 
@@ -39,11 +41,6 @@ document.querySelector('#searchField').addEventListener('keypress', function(e) 
 
 window.addEventListener('load' , (e) => {
     e.preventDefault()
-
-    socket.emit('goal' , {
-        hello : 'hello'
-       
-    })
 
     if (!navigator.geolocation) {
         return alert('Geolocation is not supported by your browser.')
