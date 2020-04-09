@@ -2,22 +2,50 @@
 <html>
     <head>
         <title>Weather App</title>
+
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./css/main.css">
     
+
+
     </head>
     <body>
         <div class="container-fluid">
             <div class="row justify-content-center mt-5">
-                <div class="col-lg-6 col-md-8 col-sm-10 col-xs-8 card rounded py-3 px-3 shadow">
+                <div class="col-lg-6 col-md-8 col-sm-10 col-xs-8 card rounded py-3 px-3 shadow-lg">
                     <div class="card-title">Weather for today</div>
                     <div class="card-text" id="temperature"></div>
                     <div class="card-text" id="summary"></div>
                     <div class="card-text" id="time"></div>
                 </div>
             </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-6 col-md-8 col-sm-10 col-xs-8 card rounded py-3 px-3 shadow-lg">
+                    <div class="input-group pt-3">
+                        <input type="text" placeholder="Start searching..." aria-describedby="searchButton" class="form-control border-0 bg-light" name="search" id="searchField">
+                        <div class="input-group-append">
+                            <button id="searchButton" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card-title text-center mt-3" id="searchError"></div>
+                        <div class="card-title text-center mt-3" id="searchCity"></div>
+                        <div class="card-text text-center" id="searchTemp"></div>
+                        <div class="card-text text-center" id="searchSumm"></div>
+                        <div class="card-text text-center" id="searchTime"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>
 </html>

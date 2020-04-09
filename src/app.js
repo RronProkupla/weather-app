@@ -16,6 +16,7 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 
 app.use(express.static(publicDirectoryPath))
 
+
 io.on('connection' , (socket) => {
     
     socket.on('sendLocation' , (coords) => {
@@ -28,6 +29,33 @@ io.on('connection' , (socket) => {
       
        
         })
+
+    socket.on('searchText', (data) => {
+        address = data.search.trim()
+        geocode(address, (error,result) => {
+            if(error){
+                socket.emit('search',{
+                    error:error
+                })
+            }else{
+                forecast(result.latitude,result.longitude,(error,forecastdata) => {
+                    if(error){
+                        socket.emit('search',{
+                            error:error
+                        })
+                    }else{
+                        socket.emit('search',{
+                            summary: forecastdata.summary,
+                            temp: forecastdata.temp , 
+                            precip: forecastdata.precip,
+                            time: forecastdata.time,
+                            location:result.location
+                        })
+                    }
+                })
+            }
+        })
+    })
 
 })
 
