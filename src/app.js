@@ -24,9 +24,8 @@ io.on('connection' , (socket) => {
                     return error
                 }
                 let a = new Date(forecastdata.time *1000)
-                a = a.toTimeString()
-                
-                console.log(a)
+                a = a.toTimeString().split(" ")[0]
+                forecastdata.time = a
                 socket.emit('message',forecastdata)
             })
       
@@ -35,12 +34,6 @@ io.on('connection' , (socket) => {
 
 })
 
-function convertEpochToSpecificTimezone(offset,time){
-    var d = new Date(time);
-    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);  //This converts to UTC 00:00
-    var nd = new Date(utc + (3600000*offset));
-    return nd.toLocaleString();
-}
 
 server.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
