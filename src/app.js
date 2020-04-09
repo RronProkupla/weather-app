@@ -18,19 +18,29 @@ app.use(express.static(publicDirectoryPath))
 
 io.on('connection' , (socket) => {
     
-    socket.on('sendlocation' , (coords) => {
-        // forecast(coords.latitude,coords.longitude, (error , forecastdata) => {
-        //         if(error){
-        //             return error
-        //         }
-        //         socket.emit('message',forecastdata)
-        //     })
-        io.emit('message',coords)
+    socket.on('sendLocation' , (coords) => {
+        forecast(coords.latitude,coords.longitude, (error , forecastdata) => {
+                if(error){
+                    return error
+                }
+                let a = new Date(forecastdata.time *1000)
+                a = a.toTimeString()
+                
+                console.log(a)
+                socket.emit('message',forecastdata)
+            })
+      
+       
         })
 
 })
 
-
+function convertEpochToSpecificTimezone(offset,time){
+    var d = new Date(time);
+    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);  //This converts to UTC 00:00
+    var nd = new Date(utc + (3600000*offset));
+    return nd.toLocaleString();
+}
 
 server.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
